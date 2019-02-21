@@ -73,7 +73,7 @@ public class ThVisualizza extends Thread {
     public void run() {
         try {
 
-            while (!finito) {
+            while (PtrDati.getContinua()==true) {
                 clearConsole();
                 PtrDati.VisualizzaSchermo();
                 Thread.sleep(100);
@@ -83,6 +83,7 @@ public class ThVisualizza extends Thread {
         } catch (InterruptedException ex) {
             Logger.getLogger(ThVisualizza.class.getName()).log(Level.SEVERE, null, ex);
         }
+        PtrDati.getinterrupedSemaphore().release();
 
     }
 

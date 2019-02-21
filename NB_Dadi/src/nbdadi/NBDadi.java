@@ -51,16 +51,31 @@ public class NBDadi {
             
             scan.nextLine();
             
-            th1.termina();
-            th2.termina();
-            th3.termina();
-            thVis.termina();
-            th1.join();
-            th2.join();
-            th3.join();
-            thVis.join();
+            //Fermo tutti
+            dati.fermaTutti();
             
-            dati.VisualizzaSchermo();
+            //Aspetto
+            dati.getinterrupedSemaphore().acquire(4);
+            
+            //Controllo se i th dati sono terminati
+            System.out.println("Checksum status Thread:");
+            ThDadi[] dadi = new ThDadi[] {th1,th2,th3};
+            for(int i=0; i<3; i++){
+                if(dadi[i].isAlive()==false){
+                    System.out.println(dadi[i].getName()+": sono morto");
+                }else{
+                    System.out.println(dadi[i].getName()+": sono vivo");
+                }
+            }
+            //Controllo se thVis è finito
+            if(thVis.isAlive()==false){
+                    System.out.println(thVis.getName()+": sono morto");
+                }else{
+                    System.out.println(thVis.getName()+": sono vivo");
+            }
+            
+            
+            //dati.VisualizzaSchermo();
             
             if ((dati.getPrimoDado() == dati.getSecondoDado()) && (dati.getPrimoDado() == dati.getTerzoDado())) {
                 System.out.println("Combinazione uscita:" + dati.getPrimoDado() + "|" + dati.getSecondoDado() + "|" + dati.getTerzoDado() + " Complimenti hai vinto!");

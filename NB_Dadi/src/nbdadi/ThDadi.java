@@ -71,10 +71,7 @@ public class ThDadi extends Thread {
     @Override
     public void run() {
         try {
-            while (!finito) {
-                if (Thread.currentThread().isInterrupted()) {
-                    break;
-                }
+            while (PtrDati.getContinua()==true) {
                 int num = (int) ((Math.random() * 6) + 1);
 
                 PtrDati.aggiungiStringa("Hai lanciato il " + numeroDado + "° dado: E' uscito " + num);
@@ -98,11 +95,10 @@ public class ThDadi extends Thread {
         } catch (InterruptedException ex) {
 
         }
+        PtrDati.getinterrupedSemaphore().release();
 
     }
 
-    void termina() {
-        finito = true;
-    }
+
 
 }
