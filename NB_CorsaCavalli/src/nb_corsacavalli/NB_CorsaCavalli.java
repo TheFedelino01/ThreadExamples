@@ -72,13 +72,21 @@ public class NB_CorsaCavalli {
             Clop4.interrupt();
             Clop5.interrupt();
 
+            
             //attendi
-            Clop1.join();
-            Clop2.join();
-            Clop3.join();
-            Clop4.join();
-            Clop5.join();
-
+            dati.getinterrupedSemaphore().acquire(5);
+            
+            //Controllo se i th sono terminati
+            System.out.println("Checksum status Thread:");
+            ThCorsa[] corse = new ThCorsa[] {Clop1,Clop2,Clop3,Clop4,Clop5};
+            for(int i=0; i<5; i++){
+                if(corse[i].isAlive()==false){
+                    System.out.println(corse[i].getName()+": sono morto");
+                }else{
+                    System.out.println(corse[i].getName()+": sono vivo");
+                }
+            }
+            
             int max = 0;
             int cavallo = 0;
             if (dati.getnClop1() > max) {
@@ -102,7 +110,7 @@ public class NB_CorsaCavalli {
                 cavallo = 5;
             }
 
-            System.out.println("Numero galoppi:");
+            System.out.println("\nNumero galoppi:");
             System.out.println("Clop1 --> " + dati.getnClop1());
             System.out.println("Clop2 --> " + dati.getnClop2());
             System.out.println("Clop3 --> " + dati.getnClop3());

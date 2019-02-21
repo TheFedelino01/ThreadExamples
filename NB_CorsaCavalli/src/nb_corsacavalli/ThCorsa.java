@@ -78,6 +78,7 @@ public class ThCorsa extends Thread {
      */
     @Override
     public void run() {
+        
         int n = 0;
         Random nRand=new Random();        
         try {
@@ -100,6 +101,8 @@ public class ThCorsa extends Thread {
             // Logger.getLogger(ThCorsa.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        
+        
         switch (this.nThread) {
             case 1:
                 ptrDati.setnClop1(n);
@@ -124,6 +127,8 @@ public class ThCorsa extends Thread {
             default:
                 break;
 
+             
         }
+        ptrDati.getinterrupedSemaphore().release();
     }
 }
