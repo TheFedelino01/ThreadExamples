@@ -57,14 +57,21 @@ public class NBDinDonDan {
                     loop = false;
                 }
             }
-            th1.interrupt();
-            th2.interrupt();
-            th3.interrupt();
+            dati.fermaTutti();
             
-            th1.join();
-            th2.join();
-            th3.join();
+            //Aspetto
+            dati.getinterrupedSemaphore().acquire(3);
             
+            //Controllo se i th dati sono terminati
+            System.out.println("Checksum status Thread:");
+            ThSuono[] suoni = new ThSuono[] {th1,th2,th3};
+            for(int i=0; i<3; i++){
+                if(suoni[i].isAlive()==false){
+                    System.out.println(suoni[i].getName()+": sono morto");
+                }else{
+                    System.out.println(suoni[i].getName()+": sono vivo");
+                }
+            }
 
             System.out.println("Qual è il suono che è stato richiamato più volte?");
             System.out.println("1)DIN");

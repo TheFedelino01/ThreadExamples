@@ -5,6 +5,8 @@
  */
 package nbdindondan;
 
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author Princess Joy Padua
@@ -22,6 +24,10 @@ public class DatiCondivisi {
     int maxElem=10000000;
     String schermo[];
     int p;
+    boolean continua=true;
+     
+    Semaphore interrupedSemaphore= new Semaphore(0);
+    
 
     public DatiCondivisi() {
         this.schermo=new String [maxElem];
@@ -36,27 +42,27 @@ public class DatiCondivisi {
         this.p=0;
     }
 
-    public int getContaDIN() {
+    public synchronized int getContaDIN() {
         return contaDIN;
     }
 
-    public void setContaDIN(int contaDIN) {
+    public synchronized void setContaDIN(int contaDIN) {
         this.contaDIN = contaDIN;
     }
 
-    public int getContaDON() {
+    public synchronized int getContaDON() {
         return contaDON;
     }
 
-    public void setContaDON(int contaDON) {
+    public synchronized void setContaDON(int contaDON) {
         this.contaDON = contaDON;
     }
 
-    public int getContaDAN() {
+    public synchronized int getContaDAN() {
         return contaDAN;
     }
 
-    public void setContaDAN(int contaDAN) {
+    public synchronized void setContaDAN(int contaDAN) {
         this.contaDAN = contaDAN;
     }
     
@@ -69,7 +75,7 @@ public class DatiCondivisi {
      * @return indica se hai vinto o no.
      * 
      */
-    public String verificaSeHaiVinto(int c) {
+    public synchronized String verificaSeHaiVinto(int c) {
         String x="Hai Perso";
         if(c==1 && contaDIN>contaDON && contaDIN>contaDAN) {
             x="Hai Vinto!";
@@ -82,13 +88,13 @@ public class DatiCondivisi {
         }
         return x;
     }
-    public void aggiungi(String x) {
+    public synchronized void aggiungi(String x) {
         if (p >= maxElem)
             p = 0;
         schermo[p]=x;
         p+=1;
     }
-    public void printSchermo() {
+    public synchronized void printSchermo() {
         System.out.println("-------------------------------");
         for (int i = 0; i < p; i ++) {
             System.out.print(schermo[i] + " ");
@@ -96,5 +102,17 @@ public class DatiCondivisi {
                 System.out.println("");
         }
         System.out.println("\n-------------------------------");
+    }
+    
+    public synchronized Semaphore getinterrupedSemaphore(){
+        return interrupedSemaphore;
+    }
+    
+    public synchronized void fermaTutti(){
+        continua=false;
+    }
+    
+    public synchronized boolean getContinua(){
+        return continua;
     }
 }

@@ -67,9 +67,8 @@ public class ThSuono extends Thread {
      *
      */
     public void run() {
-        boolean verify = true;
         try {
-            while (verify == true) {
+            while (ptrdati.getContinua()==true) {
                 if (faiSleep == true && faiYield == false) {
                     System.out.println(suono);
                 }
@@ -95,12 +94,10 @@ public class ThSuono extends Thread {
                 int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
                 sleep(randomNum);
 
-                if (Thread.currentThread().isInterrupted()) {
-                    break;
-                }
             }
         } catch (InterruptedException ex) {
 
         }
+        ptrdati.getinterrupedSemaphore().release();
     }
 }
