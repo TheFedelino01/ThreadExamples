@@ -67,6 +67,7 @@ public class DatiCondivisi {
      */
     int primaPosizioneLibera;
 
+    boolean continua=true;
      
     Semaphore interrupedSemaphore= new Semaphore(0);
 
@@ -247,6 +248,17 @@ public class DatiCondivisi {
     public synchronized Semaphore getinterrupedSemaphore(){
         return interrupedSemaphore;
     }
+    
+    public synchronized void fermaTutti(){
+        continua=false;
+    }
+    
+    public synchronized boolean getContinua(){
+        return continua;
+    }
+    
+    
+    
         
 
 }

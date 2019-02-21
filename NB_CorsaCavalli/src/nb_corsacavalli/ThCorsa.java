@@ -82,7 +82,7 @@ public class ThCorsa extends Thread {
         int n = 0;
         Random nRand=new Random();        
         try {
-            while (true) {
+            while (ptrDati.getContinua()==true) {
                 n++;
                 ptrDati.aggiungiLinea("Clop" + nThread);
                 
@@ -93,9 +93,6 @@ public class ThCorsa extends Thread {
                     Thread.yield();
                 }
 
-                if (Thread.currentThread().isInterrupted()) {
-                    break;
-                }
             }
         } catch (InterruptedException ex) {
             // Logger.getLogger(ThCorsa.class.getName()).log(Level.SEVERE, null, ex);

@@ -66,11 +66,7 @@ public class NB_CorsaCavalli {
                 }
             }
 
-            Clop1.interrupt();
-            Clop2.interrupt();
-            Clop3.interrupt();
-            Clop4.interrupt();
-            Clop5.interrupt();
+            dati.fermaTutti();
 
             
             //attendi
