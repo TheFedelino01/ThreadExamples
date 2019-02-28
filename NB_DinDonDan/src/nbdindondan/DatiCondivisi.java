@@ -28,6 +28,9 @@ public class DatiCondivisi {
      
     Semaphore interrupedSemaphore= new Semaphore(0);
     
+    Semaphore syncDin= new Semaphore(0);
+    Semaphore syncDon= new Semaphore(0);
+    Semaphore syncDan= new Semaphore(1);
 
     public DatiCondivisi() {
         this.schermo=new String [maxElem];
@@ -110,9 +113,22 @@ public class DatiCondivisi {
     
     public synchronized void fermaTutti(){
         continua=false;
+//        syncDin.release();
+//        syncDon.release();
+//        syncDan.release();
     }
     
     public synchronized boolean getContinua(){
         return continua;
+    }
+    
+    public synchronized Semaphore getSyncDin(){
+        return syncDin;
+    }
+    public synchronized Semaphore getSyncDon(){
+        return syncDon;
+    }
+    public synchronized Semaphore getSyncDan(){
+        return syncDan;
     }
 }

@@ -70,23 +70,38 @@ public class ThSuono extends Thread {
         try {
             while (ptrdati.getContinua()==true) {
                 if (faiSleep == true && faiYield == false) {
+                    
                     System.out.println(suono);
+                    
                 }
                 if (faiYield == true && faiSleep == true) {
+                    
                     System.out.println(suono);
                     yield();
+                    
                 }
                 if (faiSleep == false && faiYield == true) {
                     yield();
-                    ptrdati.aggiungi(suono);
+
                     if (suono.equals("DIN")) {
+                        ptrdati.getSyncDan().acquire();
                         ptrdati.setContaDIN(ptrdati.getContaDIN() + 1);
+                        ptrdati.aggiungi(suono);
+                        ptrdati.getSyncDin().release();
                     }
+                    
                     if (suono.equals("DON")) {
+                        ptrdati.getSyncDin().acquire();
                         ptrdati.setContaDON(ptrdati.getContaDON() + 1);
+                        ptrdati.aggiungi(suono);
+                        ptrdati.getSyncDon().release();
                     }
+                    
                     if (suono.equals("DAN")) {
+                        ptrdati.getSyncDon().acquire();
                         ptrdati.setContaDAN(ptrdati.getContaDAN() + 1);
+                        ptrdati.aggiungi(suono);
+                        ptrdati.getSyncDan().release();
                     }
                 }
                 int min = 100;
